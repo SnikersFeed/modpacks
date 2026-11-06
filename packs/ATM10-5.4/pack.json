@@ -10,8 +10,9 @@
   },
   "java": 21,
   "memory": {
-    "minMb": 4048,
-    "maxMb": 16096
+    "minMb": 2048,
+    "maxMb": 16384,
+    "recommended": "10G"
   },
   "jvmArgs": [
     "-XX:+UseG1GC"
