@@ -118,6 +118,22 @@ GitHub не принимает файлы больше 100 МБ, а моды в�
 > `build-pack.mjs` намеренно завершается с ошибкой, если папка `files/` пуста или отсутствует,
 > чтобы случайно не перезаписать `pack.json` пустым списком файлов (`archive: null`).
 
+## Про workflow
+
+Файл `.github/workflows/publish-pack.yml` добавляется в репозиторий, только если у токена есть
+scope `workflow`. Обычный Personal Access Token с scope `repo` не может создать файл в
+`.github/workflows/`, и `git push` завершается ошибкой:
+
+```
+refusing to allow a Personal Access Token to create or update workflow ... without `workflow` scope
+```
+
+Варианты:
+
+- создать токен со scope `workflow` и запушить файл, либо
+- добавить workflow через веб-интерфейс GitHub (Actions → New workflow), либо
+- для больших сборок workflow не нужен — архив загружается в релиз вручную.
+
 ## Формат `pack.json`
 
 ```json
