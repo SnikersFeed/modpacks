@@ -10,7 +10,8 @@
   "java": 17,
   "memory": {
     "minMb": 2048,
-    "maxMb": 4096
+    "maxMb": 4096,
+    "recommended": "4G"
   },
   "jvmArgs": [],
   "files": [],

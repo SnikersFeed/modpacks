@@ -1,0 +1,51 @@
+name: Publish pack
+
+on:
+  workflow_dispatch:
+    inputs:
+      pack:
+        description: "ID сборки — имя папки в packs/ (например, example-fabric)"
+        required: true
+      tag:
+        description: "Тег релиза (например, pack-example-fabric-v1)"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Установить зависимости инструментов
+        run: npm install --prefix tools --no-audit --no-fund
+
+      - name: Собрать pack.zip и обновить pack.json
+        run: >
+          node tools/build-pack.mjs
+          --pack "packs/${{ inputs.pack }}"
+          --repo "${{ github.repository }}"
+          --tag "${{ inputs.tag }}"
+
+      - name: Создать релиз и загрузить архив
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release view "${{ inputs.tag }}" >/dev/null 2>&1 \
+            || gh release create "${{ inputs.tag }}" --title "${{ inputs.tag }}" --notes "Сборка ${{ inputs.pack }}"
+          gh release upload "${{ inputs.tag }}" "packs/${{ inputs.pack }}/dist/pack.zip" --clobber
+
+      - name: Закоммитить обновлённый pack.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "packs/${{ inputs.pack }}/pack.json"
+          git diff --cached --quiet || git commit -m "chore: pack ${{ inputs.pack }} ${{ inputs.tag }}"
+          git push
