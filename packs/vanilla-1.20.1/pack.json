@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "vanilla-1.20.1",
+  "name": "Vanilla 1.20.1",
+  "description": "Чистая Minecraft 1.20.1 без модов.",
+  "minecraft": "1.20.1",
+  "loader": {
+    "type": "vanilla"
+  },
+  "java": 17,
+  "memory": {
+    "minMb": 2048,
+    "maxMb": 4096
+  },
+  "jvmArgs": [],
+  "files": [],
+  "deleteObsolete": true
+}

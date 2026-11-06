@@ -1,0 +1,9 @@
+{
+  "name": "mc-pack-tools",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "adm-zip": "^0.6.1"
+  }
+}

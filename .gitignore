@@ -1,0 +1,10 @@
+node_modules/
+packs/*/dist/
+
+# Большие сборки: исходники files/ не храним в git (лимит GitHub — 100 МБ на файл).
+# Архив pack.zip публикуется в GitHub Releases.
+packs/ATM10-5.4/files/
+
+.DS_Store
+Thumbs.db
+*.log

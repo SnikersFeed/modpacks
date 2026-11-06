@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "example-fabric",
+  "name": "Example Fabric 1.20.1",
+  "description": "Пример сборки на Fabric. Добавьте моды в files/, затем запустите tools/build-pack.mjs.",
+  "minecraft": "1.20.1",
+  "loader": {
+    "type": "fabric",
+    "version": "0.16.14"
+  },
+  "java": 17,
+  "memory": {
+    "minMb": 2048,
+    "maxMb": 4096
+  },
+  "jvmArgs": [
+    "-XX:+UseG1GC"
+  ],
+  "files": [],
+  "archive": null,
+  "deleteObsolete": true
+}
